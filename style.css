@@ -1,0 +1,91 @@
+/* ===== 增强版学术主页 CSS ===== */
+/* 在原有基础上新增以下样式，或整体替换 */
+
+/* 平滑滚动 */
+html {
+    scroll-behavior: smooth;
+}
+
+/* 容器轻微阴影（可选） */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: white;
+    /* 去掉下面的注释启用卡片效果 */
+    /* box-shadow: 0 0 20px rgba(0,0,0,0.05); */
+    /* padding: 0 1rem; */
+}
+
+/* 姓名区域 hover 微交互 */
+.name {
+    transition: color 0.2s ease;
+}
+.name:hover {
+    color: #0969da;
+}
+
+/* 出版物条目 hover 效果 */
+.pub-item,
+.preprint-item {
+    transition: background-color 0.2s ease;
+    padding: 0.25rem 0;
+    border-radius: 8px;
+}
+.pub-item:hover,
+.preprint-item:hover {
+    background-color: #fafbfc;
+}
+
+/* 论文链接按钮样式 */
+.pub-links a,
+.preprint-links a {
+    display: inline-block;
+    background: #f6f8fa;
+    padding: 0.15rem 0.6rem;
+    border-radius: 12px;
+    border-bottom: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+.pub-links a:hover,
+.preprint-links a:hover {
+    background: #0969da;
+    color: white;
+    border-bottom: none;
+}
+
+/* Section 标题装饰 */
+.section-title {
+    position: relative;
+}
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: #0969da;
+}
+
+/* 页脚渐变分隔线 */
+.footer {
+    border-top: none;
+    position: relative;
+}
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #d0d7de, transparent);
+}
+
+/* 响应式优化 */
+@media (max-width: 700px) {
+    .section-title::after {
+        width: 40px;
+    }
+}
