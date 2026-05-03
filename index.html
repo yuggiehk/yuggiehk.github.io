@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Your Name - Personal Homepage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.5;
+            color: #111;
+            background-color: #fff;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+        }
+
+        /* Header area */
+        .header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 1.5rem;
+        }
+
+        .profile-row {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .profile-photo {
+            flex-shrink: 0;
+        }
+
+        .profile-photo img {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .name {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.25rem;
+            color: #000;
+        }
+
+        .native-name {
+            font-size: 1.2rem;
+            font-weight: normal;
+            color: #555;
+            margin-left: 0.5rem;
+        }
+
+        .title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 0.5rem 0 0.25rem 0;
+            color: #2c3e50;
+        }
+
+        .affiliation, .address, .email {
+            font-size: 0.95rem;
+            color: #3a3a3a;
+            margin: 0.2rem 0;
+        }
+
+        .email {
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            font-size: 0.9rem;
+            background: #f6f8fa;
+            display: inline-block;
+            padding: 0.2rem 0.4rem;
+            border-radius: 6px;
+        }
+
+        /* Section styling */
+        .section {
+            margin: 2rem 0;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .bio {
+            line-height: 1.6;
+            color: #2c3e50;
+        }
+
+        /* Research Interests 小章节样式 */
+        .research-interests {
+            margin: 1rem 0 0.5rem 0;
+            padding: 0.75rem 1rem;
+            background-color: #f8f9fa;
+            border-left: 4px solid #0969da;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .research-interests-title {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #0969da;
+            margin-bottom: 0.5rem;
+        }
+
+        .research-interests-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .research-interests-list li {
+            background: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #1a1a1a;
+            border: 1px solid #e1e4e8;
+        }
+
+        /* Education 样式 - 带校徽 */
+        .edu-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .edu-logo {
+            flex-shrink: 0;
+            width: 60px;
+            text-align: center;
+        }
+
+        .edu-logo img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .edu-content {
+            flex: 1;
+        }
+
+        .edu-degree {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: #1a1a1a;
+        }
+
+        .edu-school {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .edu-date {
+            font-size: 0.9rem;
+            color: #5a5a5a;
+            margin: 0.2rem 0;
+        }
+
+        .edu-detail {
+            font-size: 0.9rem;
+            color: #4a4a4a;
+            margin-top: 0.2rem;
+        }
+
+        /* Publications 样式 */
+        .pub-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .pub-thumbnail {
+            flex-shrink: 0;
+            width: 160px;
+        }
+
+        .pub-thumbnail img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .pub-thumbnail img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .pub-content {
+            flex: 1;
+        }
+
+        .pub-title {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .pub-authors {
+            font-style: normal;
+            color: #2c3e50;
+            margin: 0.15rem 0;
+        }
+
+        .pub-venue {
+            font-size: 0.9rem;
+            color: #5a5a5a;
+            margin: 0.1rem 0;
+        }
+
+        .pub-links a {
+            text-decoration: none;
+            color: #0969da;
+            font-size: 0.85rem;
+            margin-right: 1rem;
+            border-bottom: 1px solid transparent;
+        }
+
+        .pub-links a:hover {
+            border-bottom-color: #0969da;
+        }
+
+        .badge {
+            background-color: #f0f0f0;
+            font-size: 0.7rem;
+            font-weight: normal;
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            margin-left: 0.6rem;
+            vertical-align: middle;
+            color: #2c3e50;
+        }
+
+        /* Service 子部分样式 */
+        .service-subsection {
+            margin-bottom: 1.5rem;
+        }
+
+        .service-subtitle {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.2rem;
+            border-bottom: 1px dashed #eaecef;
+        }
+
+        .service-item {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .service-item strong {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        /* Honors 样式 */
+        .honor-item {
+            margin-bottom: 1rem;
+        }
+        .honor-title {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+        .honor-detail {
+            font-size: 0.9rem;
+            color: #4a4a4a;
+            margin: 0.1rem 0;
+        }
+        .honor-year {
+            font-size: 0.85rem;
+            color: #0969da;
+            font-family: monospace;
+            margin-top: 0.1rem;
+        }
+
+        .footer {
+            margin-top: 2.5rem;
+            font-size: 0.8rem;
+            color: #6a737d;
+            text-align: center;
+            border-top: 1px solid #eaecef;
+            padding-top: 1.5rem;
+        }
+
+        @media (max-width: 700px) {
+            body {
+                padding: 1rem;
+            }
+            .profile-row {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .name {
+                font-size: 1.8rem;
+            }
+            .native-name {
+                display: block;
+                margin-left: 0;
+                font-size: 1rem;
+            }
+            .profile-photo img {
+                width: 140px;
+                height: 140px;
+            }
+            .pub-item {
+                flex-direction: column;
+            }
+            .pub-thumbnail {
+                width: 100%;
+                max-width: 280px;
+                margin: 0 auto;
+            }
+            .edu-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .edu-logo {
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <div class="profile-row">
+            <div class="profile-photo">
+                <img src="your-photo.jpg" alt="Your Name">
+            </div>
+            <div class="profile-info">
+                <div class="name">
+                    Your Full Name
+                    <span class="native-name">(中文名 / 姓氏)</span>
+                </div>
+                <div class="title">Assistant Professor / Position Title</div>
+                <div class="affiliation">Department of Computer Science<br>University / Institution Name</div>
+                <div class="address">Building, Room, Street, City, Country</div>
+                <div class="email">Email: firstname at domain dot edu</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bio section with Research Interests -->
+    <div class="section">
+        <div class="section-title">Bio</div>
+        <div class="bio">
+            <p>Hi there! I am an Assistant Professor at the Department of Computer Science, [University Name]. 
+            Before joining [University], I was a Postdoctoral Researcher at [Previous Institution] cohosted by Prof. [Advisor Name] and Prof. [Another Advisor]. 
+            I earned my PhD in [Field] from [University], where I was fortunate to work with Prof. [PhD Advisor]. 
+            I received my BS degree from [University Name].</p>
+            
+            <!-- Research Interests 小章节 -->
+            <div class="research-interests">
+                <div class="research-interests-title">🔬 Research Interests</div>
+                <ul class="research-interests-list">
+                    <li>Computer Systems</li>
+                    <li>Cloud Automation</li>
+                    <li>Datacenter Networks</li>
+                    <li>Program Analysis</li>
+                    <li>AI for Systems</li>
+                    <li>Network Security</li>
+                </ul>
+            </div>
+            
+            <p style="margin-top: 0.8rem;">I'm looking for potential collaborators (e.g., students passionate in system research). 
+            If you are interested in doing a PhD/RA with me, please feel free to reach out via email.</p>
+        </div>
+    </div>
+
+    <!-- Education with school logos -->
+    <div class="section">
+        <div class="section-title">Education</div>
+        
+        <!-- PhD - University of Michigan -->
+        <div class="edu-item">
+            <div class="edu-logo">
+                <img src="umich-logo.png" alt="University of Michigan logo">
+            </div>
+            <div class="edu-content">
+                <div class="edu-degree">Ph.D. in Computer Science and Engineering</div>
+                <div class="edu-school">University of Michigan</div>
+                <div class="edu-date">2019 – 2023</div>
+                <div class="edu-detail">Advisor: Prof. Ang Chen</div>
+            </div>
+        </div>
+
+        <!-- Bachelor - BUPT -->
+        <div class="edu-item">
+            <div class="edu-logo">
+                <img src="bupt-logo.png" alt="BUPT logo">
+            </div>
+            <div class="edu-content">
+                <div class="edu-degree">B.S. in Computer Science</div>
+                <div class="edu-school">Beijing University of Posts and Telecommunications (BUPT)</div>
+                <div class="edu-date">2012 – 2016</div>
+                <div class="edu-detail">Outstanding Graduate Award</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Publications -->
+    <div class="section">
+        <div class="section-title">Publications</div>
+
+        <div class="pub-item">
+            <div class="pub-thumbnail">
+                <img src="paper1.jpg" alt="Towards Learned Switch Behavior Modeling thumbnail">
+            </div>
+            <div class="pub-content">
+                <div class="pub-title">Towards Learned Switch Behavior Modeling <span class="badge">Best Paper Award!</span></div>
+                <div class="pub-authors">Daqian Ding, Ziqian Liu, Zhixiong Niu, Ziyu Mao, Jingyu Wang, Yongqiang Xiong, Your Name</div>
+                <div class="pub-venue">[APNet 2026] • to appear</div>
+                <div class="pub-links"><a href="#">[pdf]</a></div>
+            </div>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-thumbnail">
+                <img src="paper2.jpg" alt="EXP-Bench thumbnail">
+            </div>
+            <div class="pub-content">
+                <div class="pub-title">EXP-Bench: Can AI Conduct AI Research Experiments?</div>
+                <div class="pub-authors">Patrick Tser Jern Kon, Jiachen Liu, Xinyi Zhu, Qiuyi Ding, Jingjia Peng, Jiarong Xing, Yibo Huang, Your Name, et al.</div>
+                <div class="pub-venue">[ICLR 2026]</div>
+                <div class="pub-links"><a href="#">[pdf]</a></div>
+            </div>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-thumbnail">
+                <img src="paper3.jpg" alt="Skyline thumbnail">
+            </div>
+            <div class="pub-content">
+                <div class="pub-title">Skyline: A Cloud Centric Internet Monitoring Engine</div>
+                <div class="pub-authors">Shixian Guo*, Ziqian Liu*, Yangyang Bai, Yuan Chen, Kefei Liu, Qi Zhang, Songlin Liu, Yang Lv, Jianwei Hu, Your Name, et al. (* co-first)</div>
+                <div class="pub-venue">[NSDI 2026] • to appear</div>
+                <div class="pub-links"><a href="#">[pdf]</a></div>
+            </div>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-thumbnail">
+                <img src="paper4.jpg" alt="Remote Direct Code Execution thumbnail">
+            </div>
+            <div class="pub-content">
+                <div class="pub-title">Remote Direct Code Execution</div>
+                <div class="pub-authors">Yibo Huang, Your Name, Daqian Ding, Patrick Tser Jern Kon, Yiwen Zhang, Yuzhou Mao, Archit Bhatnagar, Mosharaf Chowdhury, Srinivas Devadas, Jiarong Xing, Ang Chen</div>
+                <div class="pub-venue">[HotNets 2025]</div>
+                <div class="pub-links"><a href="#">[pdf]</a></div>
+            </div>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-thumbnail">
+                <img src="paper5.jpg" alt="A Case for Learned Cloud Emulators thumbnail">
+            </div>
+            <div class="pub-content">
+                <div class="pub-title">A Case for Learned Cloud Emulators</div>
+                <div class="pub-authors">Archit Bhatnagar, Your Name, Sarah McClure, Sylvia Ratnasamy, Ang Chen</div>
+                <div class="pub-venue">[HotNets 2025]</div>
+                <div class="pub-links"><a href="#">[pdf]</a></div>
+            </div>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-thumbnail">
+                <img src="paper6.jpg" alt="Cloud Infrastructure Management thumbnail">
+            </div>
+            <div class="pub-content">
+                <div class="pub-title">Cloud Infrastructure Management in the Age of AI Agents</div>
+                <div class="pub-authors">Zhenning Yang*, Archit Bhatnagar*, Your Name*, Tongyuan Miao, Patrick Tser Jern Kon, Yunming Xiao, Yibo Huang, Martin Casado, Ang Chen</div>
+                <div class="pub-venue">[SIGOPS Operating Systems Review 2025]</div>
+                <div class="pub-links"><a href="#">[pdf]</a></div>
+            </div>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-thumbnail">
+                <img src="paper7.jpg" alt="Exposing RDMA NIC Resources thumbnail">
+            </div>
+            <div class="pub-content">
+                <div class="pub-title">Exposing RDMA NIC Resources for Software-Defined Scheduling</div>
+                <div class="pub-authors">Yibo Huang, Your Name, Yunming Xiao, Archit Bhatnagar, Sylvia Ratnasamy, Ang Chen</div>
+                <div class="pub-venue">[APNet 2025] <strong>Best Paper Award!</strong></div>
+                <div class="pub-links"><a href="#">[pdf]</a></div>
+            </div>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-thumbnail">
+                <img src="paper8.jpg" alt="Automated Bug Discovery thumbnail">
+            </div>
+            <div class="pub-content">
+                <div class="pub-title">Automated Bug Discovery in Cloud Infrastructure-as-Code Updates with LLM Agents</div>
+                <div class="pub-authors">Yiming Xiang, Zhenning Yang, Jingjia Peng, Hermann Bauer, Patrick Tser Jern Kon, Your Name, Ang Chen</div>
+                <div class="pub-venue">[AIOps 2025]</div>
+                <div class="pub-links"><a href="#">[pdf]</a></div>
+            </div>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-thumbnail">
+                <img src="paper9.jpg" alt="Synthesizing Runtime Programmable Switch Updates thumbnail">
+            </div>
+            <div class="pub-content">
+                <div class="pub-title">Synthesizing Runtime Programmable Switch Updates</div>
+                <div class="pub-authors">Your Name, Ryan Beckett, Ang Chen</div>
+                <div class="pub-venue">[NSDI 2023]</div>
+                <div class="pub-links"><a href="#">[pdf]</a></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Honors & Awards -->
+    <div class="section">
+        <div class="section-title">Honors & Awards</div>
+        
+        <div class="honor-item">
+            <div class="honor-title">Best Paper Award, APNet 2025</div>
+            <div class="honor-detail">For paper "Exposing RDMA NIC Resources for Software-Defined Scheduling"</div>
+            <div class="honor-year">2025</div>
+        </div>
+
+        <div class="honor-item">
+            <div class="honor-title">NSF Innovation Corps (I-Corps) Entrepreneur Lead</div>
+            <div class="honor-detail">National Science Foundation</div>
+            <div class="honor-year">2024</div>
+        </div>
+
+        <div class="honor-item">
+            <div class="honor-title">Rackham Predoctoral Fellowship</div>
+            <div class="honor-detail">University of Michigan</div>
+            <div class="honor-year">2022-2023</div>
+        </div>
+
+        <div class="honor-item">
+            <div class="honor-title">Outstanding Teaching Assistant Award</div>
+            <div class="honor-detail">Rice University</div>
+            <div class="honor-year">2021</div>
+        </div>
+
+        <div class="honor-item">
+            <div class="honor-title">Excellent Graduate Award</div>
+            <div class="honor-detail">Beijing University of Posts and Telecommunications</div>
+            <div class="honor-year">2016</div>
+        </div>
+    </div>
+
+    <!-- Service section - 拆分为 Teaching Assistant 和 Reviewer -->
+    <div class="section">
+        <div class="section-title">Service</div>
+        
+        <!-- Teaching Assistant 部分 -->
+        <div class="service-subsection">
+            <div class="service-subtitle">📚 Teaching Assistant</div>
+            <div class="service-item">
+                <strong>Secure and Cloud Computing</strong> (COMP 436/536)<br>
+                Rice University, Fall 2020, Fall 2021
+            </div>
+            <div class="service-item">
+                <strong>Discrete Mathematics</strong> (COMP 2121B)<br>
+                University of Hong Kong, Fall 2025 <span class="badge">Instructor</span>
+            </div>
+        </div>
+
+        <!-- Reviewer 部分 -->
+        <div class="service-subsection">
+            <div class="service-subtitle">📝 Reviewer</div>
+            <div class="service-item">
+                <strong>Journal Reviewer:</strong> IEEE/ACM Transactions on Networking, Computer Networks, IEEE JSAC
+            </div>
+            <div class="service-item">
+                <strong>Conference Reviewer:</strong> SIGCOMM, ASPLOS, APSys, WWW, P4 Workshop
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        © 2025 Your Name | Last updated: May 2026
+    </div>
+</div>
+</body>
+</html>
