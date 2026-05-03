@@ -408,41 +408,6 @@
             color: #2c3e50;
         }
 
-        /* Visitor Counter */
-        .visitor-counter-container {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 16px;
-            padding: 2rem;
-            text-align: center;
-            margin: 1rem 0;
-        }
-
-        .counter-display {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 12px;
-            padding: 1.5rem;
-        }
-
-        .counter-number {
-            font-size: 3.5rem;
-            font-weight: 700;
-            color: #0969da;
-            display: block;
-            line-height: 1.2;
-        }
-
-        .counter-label {
-            font-size: 1rem;
-            color: #2c3e50;
-            font-weight: 500;
-        }
-
-        .counter-note {
-            margin-top: 1rem;
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 0.85rem;
-        }
-
         /* Footer */
         .footer {
             margin-top: 2.5rem;
@@ -451,6 +416,12 @@
             text-align: center;
             border-top: 1px solid #eaecef;
             padding-top: 1.5rem;
+        }
+
+        .visitor-line {
+            margin-top: 0.3rem;
+            font-size: 0.75rem;
+            color: #8a9199;
         }
 
         /* Responsive Design */
@@ -509,10 +480,6 @@
                 margin-left: 0;
                 margin-top: 0.2rem;
             }
-            
-            .counter-number {
-                font-size: 2.5rem;
-            }
         }
     </style>
 </head>
@@ -557,18 +524,6 @@
             
             <p style="margin-top: 0.8rem;">I am actively seeking collaboration opportunities in the fields of Computer Vision, Embodied AI, and Multi-modal Large Language Models. I warmly invite researchers and practitioners with shared interests to connect with me via email.<br><br>
             Furthermore, I am currently exploring opportunities for both a short-term internship and a long-term research position, and would be delighted to discuss potential openings.</p>
-        </div>
-    </div>
-
-    <!-- Visitor Counter -->
-    <div class="section">
-        <div class="section-title">📊 Visitor Counter</div>
-        <div class="visitor-counter-container">
-            <div class="counter-display">
-                <span class="counter-number" id="visitorCount">0</span>
-                <span class="counter-label">people have visited this page</span>
-            </div>
-            <div class="counter-note">✨ Thanks for stopping by!</div>
         </div>
     </div>
 
@@ -884,7 +839,8 @@
 
     <!-- Footer -->
     <div class="footer">
-        © 2025 Yuejiao Su | Last updated: May 2026
+        <div>© 2025 Yuejiao Su | Last updated: May 2026</div>
+        <div class="visitor-line">Visitor: <span id="visitorCount">0</span></div>
     </div>
 </div>
 
@@ -919,9 +875,6 @@
             saveVisitorCount(currentCount);
             localStorage.setItem(VISITOR_KEY, 'true');
             updateCounterDisplay();
-            console.log('New visitor recorded! Total: ' + currentCount);
-        } else {
-            console.log('Returning visitor. Count: ' + getVisitorCount());
         }
     }
 
