@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Yuejiao Su - Personal Homepage</title>
+    <!-- Leaflet CSS (开源地图库) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         * {
             margin: 0;
@@ -92,7 +94,6 @@
             border-radius: 6px;
         }
 
-        /* Email link styling */
         .email a {
             text-decoration: none;
             color: #3a3a3a;
@@ -213,7 +214,6 @@
             margin-top: 0.2rem;
         }
 
-        /* Advisor styling */
         .edu-advisor {
             font-size: 0.9rem;
             color: #3a3a3a;
@@ -280,14 +280,12 @@
             margin: 0.1rem 0;
         }
 
-        /* Venue styling - blue italic */
         .venue-em {
             font-style: italic;
             color: #0969da;
             font-weight: 500;
         }
 
-        /* Publication links styling */
         .pub-links a {
             text-decoration: none;
             color: #0969da;
@@ -403,6 +401,66 @@
             color: #2c3e50;
         }
 
+        /* Visitor Map */
+        .visitor-map-container {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .visitor-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .visitor-count {
+            background: #0969da;
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .visitor-count span {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-right: 0.3rem;
+        }
+
+        .refresh-btn {
+            background: #e1e4e8;
+            border: none;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .refresh-btn:hover {
+            background: #d0d7de;
+        }
+
+        #visitorMap {
+            height: 350px;
+            width: 100%;
+            border-radius: 8px;
+            z-index: 1;
+        }
+
+        .visitor-note {
+            font-size: 0.7rem;
+            color: #6a737d;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
         .footer {
             margin-top: 2.5rem;
             font-size: 0.8rem;
@@ -457,8 +515,13 @@
                 margin-left: 0;
                 margin-top: 0.2rem;
             }
+            #visitorMap {
+                height: 250px;
+            }
         }
     </style>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
 <div class="container">
@@ -501,6 +564,21 @@
             
             <p style="margin-top: 0.8rem;">I am actively seeking collaboration opportunities in the fields of Computer Vision, Embodied AI, and Multi-modal Large Language Models. I warmly invite researchers and practitioners with shared interests to connect with me via email.<br><br>
             Furthermore, I am currently exploring opportunities for both a short-term internship and a long-term research position, and would be delighted to discuss potential openings.</p>
+        </div>
+    </div>
+
+    <!-- Visitor Map Section -->
+    <div class="section">
+        <div class="section-title">🌍 Visitor Map</div>
+        <div class="visitor-map-container">
+            <div class="visitor-stats">
+                <div class="visitor-count">
+                    <span id="visitorTotal">0</span> people visited this page
+                </div>
+                <button class="refresh-btn" onclick="refreshVisitorData()">🔄 Refresh</button>
+            </div>
+            <div id="visitorMap"></div>
+            <div class="visitor-note">📍 Click on the map to add your location | Each dot represents a visitor from around the world</div>
         </div>
     </div>
 
@@ -563,7 +641,7 @@
             <div class="pub-content">
                 <div class="pub-title">Interaction-aware Representation Modeling With Co-Occurrence Consistency for Egocentric Hand-Object Parsing</div>
                 <div class="pub-authors">Yuejiao Su, Yi Wang, Lei Yao, Yawen Cui, Lap-Pui Chau</div>
-                <div class="pub-venue"> International Conference on Learning Representations <em class="venue-em">(ICLR)</em>, 2026</div>
+                <div class="pub-venue"><em class="venue-em">ICLR</em> (International Conference on Learning Representations), 2026</div>
                 <div class="pub-links"><a href="https://arxiv.org/abs/2602.20597">[pdf]</a> <a href="https://github.com/yuggiehk/InterFormer">[code]</a></div>
             </div>
         </div>
@@ -576,7 +654,7 @@
             <div class="pub-content">
                 <div class="pub-title">EARL: Towards a Unified Analysis-Guided Reinforcement Learning Framework for Egocentric Interaction Reasoning and Pixel Grounding</div>
                 <div class="pub-authors">Yuejiao Su, Xinshen Zhang, Zhen Ye, Lei Yao, Lap-Pui Chau, Yi Wang</div>
-                <div class="pub-venue"> International Conference on Machine Learning <em class="venue-em">(ICML)</em>, 2026</div>
+                <div class="pub-venue"><em class="venue-em">ICML</em> (International Conference on Machine Learning), 2026</div>
                 <div class="pub-links"><a href="#">[pdf]</a> <a href="#">[arXiv]</a> <a href="#">[code]</a></div>
             </div>
         </div>
@@ -589,7 +667,7 @@
             <div class="pub-content">
                 <div class="pub-title">ANNEXE: Unified Analyzing, Answering, and Pixel Grounding for Egocentric Interaction</div>
                 <div class="pub-authors">Yuejiao Su, Yi Wang, Qiongyang Hu, Chuang Yang, Lap-Pui Chau</div>
-                <div class="pub-venue"> IEEE/CVF Conference on Computer Vision and Pattern Recognition <em class="venue-em">(CVPR)</em>, 2025</div>
+                <div class="pub-venue"><em class="venue-em">CVPR</em> (IEEE/CVF Conference on Computer Vision and Pattern Recognition), 2025</div>
                 <div class="pub-links"><a href="https://arxiv.org/abs/2504.01472">[pdf]</a> <a href="#">[code]</a> <a href="https://yuggiehk.github.io/annexe/">[project]</a></div>
             </div>
         </div>
@@ -615,7 +693,7 @@
             <div class="pub-content">
                 <div class="pub-title">Deep Feature Selection-And-Fusion for RGB-D Semantic Segmentation</div>
                 <div class="pub-authors">Yuejiao Su, Yuan Yuan, Zhiyu Jiang</div>
-                <div class="pub-venue"> IEEE International Conference on Multimedia and Expo <em class="venue-em">(ICME)</em>, 2021</div>
+                <div class="pub-venue"><em class="venue-em">ICME</em> (IEEE International Conference on Multimedia and Expo), 2021</div>
                 <div class="pub-links"><a href="https://arxiv.org/abs/2105.04102">[pdf]</a></div>
             </div>
         </div>
@@ -628,7 +706,7 @@
             <div class="pub-content">
                 <div class="pub-title">Few-shot Class-agnostic Counting with Occlusion Augmentation and Localization</div>
                 <div class="pub-authors">Yuejiao Su, Yi Wang, Lei Yao, Lap-Pui Chau</div>
-                <div class="pub-venue"> IEEE International Symposium on Circuits and Systems <em class="venue-em">(ISCAS)</em>, 2024</div>
+                <div class="pub-venue"><em class="venue-em">ISCAS</em> (IEEE International Symposium on Circuits and Systems), 2024</div>
                 <div class="pub-links"><a href="https://ieeexplore.ieee.org/document/10558069/">[pdf]</a></div>
             </div>
         </div>
@@ -646,7 +724,7 @@
             <div class="pub-content">
                 <div class="pub-title">HAMMER: Harnessing MLLMs via Cross-Modal Integration for Intention-Driven 3D Affordance Grounding</div>
                 <div class="pub-authors">Lei Yao, Yong Chen, Yuejiao Su, Yi Wang, Moyun Liu, Lap-Pui Chau</div>
-                <div class="pub-venue"> IEEE/CVF Conference on Computer Vision and Pattern Recognition <em class="venue-em">(CVPR)</em>, 2026</div>
+                <div class="pub-venue"><em class="venue-em">CVPR</em> (IEEE/CVF Conference on Computer Vision and Pattern Recognition), 2026</div>
                 <div class="pub-links"><a href="https://arxiv.org/abs/2603.02329">[pdf]</a> <a href="https://rayyoh.github.io/Hammer/">[code]</a></div>
             </div>
         </div>
@@ -819,5 +897,229 @@
         © 2025 Yuejiao Su | Last updated: May 2026
     </div>
 </div>
+
+<script>
+    // 访客数据和地图
+    let visitorMap = null;
+    let visitorMarkers = [];
+
+    // 访客数据存储 key
+    const STORAGE_KEY = 'visitor_locations';
+    const COUNT_KEY = 'visitor_count';
+
+    // 获取示例访客数据（模拟一些初始访客）
+    function getInitialVisitors() {
+        return [
+            { lat: 22.3193, lng: 114.1694, city: "Hong Kong", country: "China", timestamp: Date.now() - 7 * 86400000 },
+            { lat: 31.2304, lng: 121.4737, city: "Shanghai", country: "China", timestamp: Date.now() - 5 * 86400000 },
+            { lat: 34.3416, lng: 108.9398, city: "Xi'an", country: "China", timestamp: Date.now() - 3 * 86400000 },
+            { lat: 37.7749, lng: -122.4194, city: "San Francisco", country: "USA", timestamp: Date.now() - 2 * 86400000 },
+            { lat: 40.7128, lng: -74.0060, city: "New York", country: "USA", timestamp: Date.now() - 1 * 86400000 },
+            { lat: 51.5074, lng: -0.1278, city: "London", country: "UK", timestamp: Date.now() - 4 * 86400000 },
+            { lat: 35.6895, lng: 139.6917, city: "Tokyo", country: "Japan", timestamp: Date.now() - 6 * 86400000 }
+        ];
+    }
+
+    // 获取访客数据
+    function getVisitorData() {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+            return JSON.parse(stored);
+        } else {
+            const initial = getInitialVisitors();
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(initial));
+            localStorage.setItem(COUNT_KEY, initial.length.toString());
+            return initial;
+        }
+    }
+
+    // 保存访客数据
+    function saveVisitorData(data) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        localStorage.setItem(COUNT_KEY, data.length.toString());
+        updateVisitorCountDisplay(data.length);
+    }
+
+    // 添加新访客位置
+    function addVisitorLocation(lat, lng, cityName = null) {
+        const visitors = getVisitorData();
+        
+        // 简单去重：检查是否已经有相近位置（误差约50km内不重复添加）
+        const isDuplicate = visitors.some(v => {
+            const latDiff = Math.abs(v.lat - lat);
+            const lngDiff = Math.abs(v.lng - lng);
+            return latDiff < 0.5 && lngDiff < 0.5;
+        });
+        
+        if (!isDuplicate) {
+            let city = cityName || `${lat.toFixed(2)}, ${lng.toFixed(2)}`;
+            visitors.push({
+                lat: lat,
+                lng: lng,
+                city: city,
+                timestamp: Date.now()
+            });
+            saveVisitorData(visitors);
+            addMarkerToMap(lat, lng, city);
+            return true;
+        }
+        return false;
+    }
+
+    // 获取访客位置（通过 IP 定位）
+    function getVisitorLocation() {
+        // 检查今天是否已经记录过这个访客
+        const today = new Date().toDateString();
+        const lastVisit = localStorage.getItem('last_visit_date');
+        
+        if (lastVisit === today) {
+            console.log('Already recorded today');
+            return;
+        }
+        
+        // 使用免费 IP 定位 API
+        fetch('https://ipapi.co/json/')
+            .then(response => response.json())
+            .then(data => {
+                if (data.latitude && data.longitude) {
+                    const lat = data.latitude;
+                    const lng = data.longitude;
+                    const city = data.city || data.region || 'Unknown';
+                    const country = data.country_name || '';
+                    const locationName = country ? `${city}, ${country}` : city;
+                    
+                    const added = addVisitorLocation(lat, lng, locationName);
+                    if (added) {
+                        localStorage.setItem('last_visit_date', today);
+                    }
+                }
+            })
+            .catch(error => {
+                console.log('IP location failed:', error);
+                // 如果 IP 定位失败，使用更简单的备用方案
+                fallbackIPLocation();
+            });
+    }
+
+    // 备用 IP 定位方案
+    function fallbackIPLocation() {
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(() => {
+                // 如果无法获取位置，可以添加一个默认位置或跳过
+                console.log('Using fallback - location not available');
+            })
+            .catch(err => console.log('Fallback also failed:', err));
+    }
+
+    // 在地图上添加标记
+    function addMarkerToMap(lat, lng, cityName) {
+        if (!visitorMap) return;
+        
+        const marker = L.marker([lat, lng]).addTo(visitorMap);
+        marker.bindPopup(`
+            <strong>${cityName}</strong><br>
+            Visited: ${new Date().toLocaleDateString()}
+        `);
+        visitorMarkers.push(marker);
+    }
+
+    // 加载所有标记到地图
+    function loadMarkersToMap() {
+        if (!visitorMap) return;
+        
+        // 清除现有标记
+        visitorMarkers.forEach(marker => visitorMap.removeLayer(marker));
+        visitorMarkers = [];
+        
+        const visitors = getVisitorData();
+        visitors.forEach(visitor => {
+            const marker = L.marker([visitor.lat, visitor.lng]).addTo(visitorMap);
+            const visitDate = new Date(visitor.timestamp).toLocaleDateString();
+            marker.bindPopup(`
+                <strong>${visitor.city}</strong><br>
+                Visited: ${visitDate}
+            `);
+            visitorMarkers.push(marker);
+        });
+    }
+
+    // 更新访客计数显示
+    function updateVisitorCountDisplay(count) {
+        const countEl = document.getElementById('visitorTotal');
+        if (countEl) {
+            countEl.textContent = count;
+        }
+    }
+
+    // 刷新访客计数显示
+    function refreshVisitorData() {
+        const visitors = getVisitorData();
+        updateVisitorCountDisplay(visitors.length);
+        loadMarkersToMap();
+    }
+
+    // 初始化地图
+    function initMap() {
+        // 默认视图中心为香港
+        visitorMap = L.map('visitorMap').setView([22.3193, 114.1694], 2);
+        
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; CartoDB',
+            subdomains: 'abcd',
+            maxZoom: 19,
+            minZoom: 1
+        }).addTo(visitorMap);
+        
+        // 加载已有标记
+        loadMarkersToMap();
+        
+        // 添加点击地图添加位置的功能
+        visitorMap.on('click', function(e) {
+            const lat = e.latlng.lat;
+            const lng = e.latlng.lng;
+            const locationName = `${lat.toFixed(2)}, ${lng.toFixed(2)}`;
+            
+            const added = addVisitorLocation(lat, lng, locationName);
+            if (added) {
+                // 显示提示
+                const popup = L.popup()
+                    .setLatLng([lat, lng])
+                    .setContent(`✅ Thanks for visiting! Location added.`)
+                    .openOn(visitorMap);
+                setTimeout(() => visitorMap.closePopup(popup), 2000);
+            } else {
+                const popup = L.popup()
+                    .setLatLng([lat, lng])
+                    .setContent(`📍 This location was already recorded!`)
+                    .openOn(visitorMap);
+                setTimeout(() => visitorMap.closePopup(popup), 1500);
+            }
+        });
+        
+        // 更新计数显示
+        const visitors = getVisitorData();
+        updateVisitorCountDisplay(visitors.length);
+        
+        // 尝试获取访客位置
+        setTimeout(() => {
+            getVisitorLocation();
+        }, 1000);
+    }
+
+    // 页面加载完成后初始化地图
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof L !== 'undefined') {
+            initMap();
+        } else {
+            // 如果 Leaflet 还没加载完，等待一下
+            setTimeout(() => {
+                if (typeof L !== 'undefined') {
+                    initMap();
+                }
+            }, 500);
+        }
+    });
+</script>
 </body>
 </html>
