@@ -401,66 +401,6 @@ body {
     color: #2c3e50;
 }
 
-/* Visitor Map */
-.visitor-map-container {
-    background: #f8f9fa;
-    border-radius: 12px;
-    padding: 1rem;
-    margin: 1rem 0;
-}
-
-.visitor-stats {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.visitor-count {
-    background: #0969da;
-    color: white;
-    padding: 0.4rem 1rem;
-    border-radius: 30px;
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-
-.visitor-count span {
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin-right: 0.3rem;
-}
-
-.refresh-btn {
-    background: #e1e4e8;
-    border: none;
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.refresh-btn:hover {
-    background: #d0d7de;
-}
-
-#visitorMap {
-    height: 350px;
-    width: 100%;
-    border-radius: 8px;
-    z-index: 1;
-}
-
-.visitor-note {
-    font-size: 0.7rem;
-    color: #6a737d;
-    text-align: center;
-    margin-top: 0.5rem;
-}
-
 /* Footer */
 .footer {
     margin-top: 2.5rem;
@@ -469,6 +409,12 @@ body {
     text-align: center;
     border-top: 1px solid #eaecef;
     padding-top: 1.5rem;
+}
+
+.visitor-line {
+    margin-top: 0.3rem;
+    font-size: 0.75rem;
+    color: #8a9199;
 }
 
 /* Responsive Design */
@@ -526,9 +472,5 @@ body {
     .honor-year {
         margin-left: 0;
         margin-top: 0.2rem;
-    }
-    
-    #visitorMap {
-        height: 250px;
     }
 }
